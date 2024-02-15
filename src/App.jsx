@@ -3,9 +3,10 @@ import './App.css'
 import {MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from '@chatscope/chat-ui-kit-react'
 import { useState } from 'react'
 
-const API_KEY = "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"
+const API_KEY = "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"
 
 function App() {
+  const [isTyping, setIsTyping] = useState(false)
   const [messages, setMessages] = useState([
     {
       message: "Hello, I am ChatGPT!",
@@ -13,7 +14,6 @@ function App() {
     }
   ])
 
-  const [isTyping, setIsTyping] = useState(false)
 
   const handleSend = async (message) => {
     const newMessage = {
@@ -56,7 +56,7 @@ function App() {
 
     const systemMessage = {
       role: "system",
-      content: "Explain things like you're talking to a software professional with 2 years of experience."
+      content: "Explain things like you're talking to a software graduate with an interest in frontend devlopment."
     }
 
     const apiRequestBody = {
@@ -70,10 +70,22 @@ function App() {
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer" + API_KEY,
+        "Authorization": "Bearer " + API_KEY,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(apiRequestBody)
+    }).then((data) => {
+      return data.json()
+    }).then((data) => {
+      console.log(data) 
+      console.log(data.choices[0].message.content)
+      setMessages(
+        [...chatMessages, {
+          message: data.choices[0].message.content,
+          sender: "ChatGPT"
+        }]
+      )
+      setIsTyping(false)
     })
   }
 
@@ -86,6 +98,7 @@ function App() {
          <MainContainer>
           <ChatContainer>
             <MessageList
+            scrollBehavior='smooth'
             typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing..." /> : null}
             >
               {messages.map((message, i) => {
