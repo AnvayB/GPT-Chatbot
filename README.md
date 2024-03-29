@@ -8,3 +8,9 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 <!-- https://www.youtube.com/watch?app=desktop&v=Lag9Pj_33hM -->
+
+### To see this project in action, clone the repo and run the following commands in the `gpt-chatbot` folder:
+```bash
+npm install
+make run
+```
