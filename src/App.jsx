@@ -3,8 +3,6 @@ import './App.css'
 import {MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from '@chatscope/chat-ui-kit-react'
 import { useState, useEffect } from 'react'
 
-
-
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 function App() {
