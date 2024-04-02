@@ -4,6 +4,8 @@ import {MainContainer, ChatContainer, MessageList, Message, MessageInput, Typing
 import { useState, useEffect } from 'react'
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// const API_KEY = process.env.VITE_APP_API_KEY;
+
 
 function App() {
 
@@ -19,7 +21,7 @@ function App() {
  useEffect(() => {
    if(!localStorage.getItem('prompted')) {
     // Prompt the user to select their preferred response style
-    const style = prompt("How would you like Chat-GPT to respond? \n ex: Explain as if you are talking to ...")
+    const style = prompt('How would you like Chat-GPT to respond? \n "Explain as if you are talking to ..." ')
     setResponseStyle(style); // Update the response style state
     localStorage.setItem('prompted', 'true')
    }
@@ -60,7 +62,7 @@ function App() {
     // Dynamically set the systemMessage content based on the response style
     const systemMessage = {
       role: "system",
-      content: `${style}`
+      content: `Explain as if you were talking to ${style}`
     }
 
     const apiRequestBody = {
@@ -81,8 +83,9 @@ function App() {
     }).then((data) => {
       return data.json()
     }).then((data) => {
-      console.log(data) 
+      console.log(`Explain as if you were talking to ${style}`)
       console.log(data.choices[0].message.content)
+      console.log(data) 
       setMessages(
         [...chatMessages, {
           message: data.choices[0].message.content,
