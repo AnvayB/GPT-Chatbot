@@ -1,4 +1,4 @@
-run:
+start:
 	npm run dev
 
 add:

@@ -1,41 +1,49 @@
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
 import './App.css'
 import {MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator} from '@chatscope/chat-ui-kit-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const API_KEY = "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"
+const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 function App() {
-  const [isTyping, setIsTyping] = useState(false)
-  const [messages, setMessages] = useState([
+
+ const [isTyping, setIsTyping] = useState(false)
+ const [messages, setMessages] = useState([
     {
       message: "Hello, I am ChatGPT!",
       sender: "ChatGPT"
     }
   ])
+ const [responseStyle, setResponseStyle] = useState(""); // State for response style
 
+ useEffect(() => {
+   if(!localStorage.getItem('prompted')) {
+    // Prompt the user to select their preferred response style
+    const style = prompt("How would you like Chat-GPT to respond? \n ex: Explain as if you are talking to ...")
+    setResponseStyle(style); // Update the response style state
+    localStorage.setItem('prompted', 'true')
+   }
+ 
+   
+ }, [])
+ 
 
-  const handleSend = async (message) => {
+ const handleSend = async (message) => {
     const newMessage = {
       message: message,
       sender: "user",
       direction: "outgoing"
     }
 
-    const newMessages = [...messages, newMessage] //all the old messages + the new message
+    const newMessages = [...messages, newMessage]
 
-    // update our messages state
     setMessages(newMessages)
-
-    // set a typing indicator (chatGPT is typing)
     setIsTyping(true)
 
-    // process message to chatGPT (send it over and see the response)
-    await processMessageToChatGPT(newMessages)
-  }
+    await processMessageToChatGPT(newMessages, responseStyle) // Pass the style to the function
+ }
 
-  async function processMessageToChatGPT(chatMessages) {
-
+ async function processMessageToChatGPT(chatMessages, style) {
     let apiMessages = chatMessages.map((messageObject) => {
       let role = ""
       if(messageObject.sender === "ChatGPT") {
@@ -49,21 +57,17 @@ function App() {
       }
     })
 
-    // Roles:
-    //   "user" is a message from the user
-    //   "assistant" is a response from ChatGPT
-    //   "system" is  generally 1 initial message defining HOW we want ChatGPT to talk
-
+    // Dynamically set the systemMessage content based on the response style
     const systemMessage = {
       role: "system",
-      content: "Explain things like you're talking to a software graduate with an interest in frontend devlopment."
+      content: `${style}`
     }
 
     const apiRequestBody = {
       "model": "gpt-3.5-turbo",
       "messages": [
         systemMessage,
-        ...apiMessages //[message1, message2, message3 ]
+        ...apiMessages
       ]
     }
 
@@ -87,13 +91,13 @@ function App() {
       )
       setIsTyping(false)
     })
-  }
+ }
 
- 
-
-
-  return (
+ return (
     <div className="App">
+      <div className="header">
+        GPT-Chatbot
+      </div>
       <div style={{position: "relative", height: "800px", width: "700px"}}>
          <MainContainer className='main-box'>
           <ChatContainer>
@@ -109,9 +113,8 @@ function App() {
           </ChatContainer>
          </MainContainer>
       </div>
-
     </div>
-  )
+ )
 }
 
 export default App
