@@ -19,12 +19,33 @@ body {
 }
 
 .header {
-  height: 5vh;
+  /* height: 1vh; */
+  margin-top: .5vh;
+  display: flex;
+  margin-bottom: 2vh;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.header h1{
+  margin-top: 0;
+  margin-bottom: 0;
+  flex-grow: 3;
+  flex: 1;
+}
+
+.header img {
+  height: 50px;
+  position: relative;
+  /* right: 7vw; */
+  /* top: .5vh; */
+  z-index: 999;
+}
+
 
 .main-box {
   height: 90vh;
   min-width: 300px;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   overflow: auto;
 }
