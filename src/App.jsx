@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     if (!localStorage.getItem('prompted')) {
       // Prompt the user to select their preferred response style
-      const style = prompt('How would you like Chat-GPT to respond? \n "Explain as if you are talking to ..." ')
+      const style = prompt('How would you like Chat-GPT to respond? \n "Explain as if you are talking to a ..." ')
       setResponseStyle(style); // Update the response style state
       localStorage.setItem('prompted', 'true')
     }
@@ -87,7 +87,7 @@ function App() {
     }).then((data) => {
       return data.json()
     }).then((data) => {
-      console.log(`Explain as if you were talking to ${style}`)
+      console.log(`Explain as if you were talking to a ${style}`)
       console.log(data.choices[0].message.content)
       console.log(data)
       setMessages(
