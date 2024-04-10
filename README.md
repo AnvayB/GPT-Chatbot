@@ -1,16 +1,24 @@
-# React + Vite
+# GPT-Chatbot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This is a semi-standard chatbot that implements the [OpenAI API](https://platform.openai.com/docs/introduction), demonstrating how AI can be leveraged to create engaging and infromative conversational interfaces. This showcases the basic capabilities of OpenAI's vast language model and its relevancy in various fields as a dynamic response service to users' questions.
 
-Currently, two official plugins are available:
+## Features
+- **Intelligent Responses**: Utilizes advanced NLP from OpenAI to understand and respond to user queries appropiately
+- **Customizable**: Presents users with option to adjust response style based on specific needs
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack
+- React v18.2 + Vite v4.2
+### Notable Dependencies
+- chatscope/chat-ui-kit-react v1.10
+- dotenv v16.4
+- react-dom v18.2
 
-<!-- https://www.youtube.com/watch?app=desktop&v=Lag9Pj_33hM -->
-
-### To see this project in action, clone the repo and run the following commands in the `gpt-chatbot` folder:
-```bash
+## Setup
+Open the Terminal where you want this project to exist and enter the following commands:
+```
+git clone https://github.com/AnvayB/GPT-Chatbot.git
+cd gpt-chatbot
 npm install
-make run
+make start
 ```
