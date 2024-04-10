@@ -66,7 +66,7 @@ function App() {
     // Dynamically set the systemMessage content based on the response style
     const systemMessage = {
       role: "system",
-      content: `Explain as if you were talking to ${style}`
+      content: `Explain as if you were talking to a ${style}`
     }
 
     const apiRequestBody = {
