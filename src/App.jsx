@@ -2,14 +2,9 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
 import './App.css'
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react'
 import { useState, useEffect } from 'react'
-import chatbot1 from './assets/chatbot1.png'
-import chatbot2 from './assets/chatbot2.png'
 import chatbot3 from './assets/chatbot3.png'
 
-
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
-// const API_KEY = process.env.VITE_APP_API_KEY;
-
 
 function App() {
 

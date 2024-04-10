@@ -35,3 +35,11 @@ cd gpt-chatbot
 npm install
 make start
 ```
+- You will need to get an API key from OpenAI API. Follow the steps listed in [Account Setup](https://platform.openai.com/docs/quickstart/account-setup).
+- Copy the alphanumeric secret key (sk-*****************) and make the following change in `App.jsx, Line 7`:
+```js
+// original:
+const API_KEY = import.meta.env.VITE_APP_API_KEY;
+// change to:
+const API_KEY = <YOUR_API_KEY>
+```
